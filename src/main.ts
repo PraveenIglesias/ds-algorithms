@@ -1,7 +1,18 @@
-import LinkedList from './LinkedList';
+import LinkedList from './LinkedList/SingleLinkedList';
+import DoubleLinkedList from './LinkedList/DoubleLinkedList';
 
-const ll =  new LinkedList(3);
+const ll = new LinkedList(3);
 ll.append(4);
-ll.append(5);
-ll.prepend(2);
-console.log("LinkedList", ll);
+ll.append(6);
+ll.append(8); // 3,4,6,8;
+ll.insert(2, 5); // 3,4,5,6,8
+ll.remove(2);
+console.log('List: ', ll.getList());
+
+const dll = new DoubleLinkedList(3);
+dll.append(4);
+dll.append(6); 
+dll.append(8); // 3,4,6,8;
+dll.insert(2, 5); // 3,4,5,6,8
+dll.remove(2);
+console.log('DList: ', dll.getList());
