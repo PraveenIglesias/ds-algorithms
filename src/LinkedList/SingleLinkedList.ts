@@ -89,4 +89,20 @@ export default class LinkedList<T> {
 		}
 		return list;
 	}
+
+	reverse() {
+		let currentNode = this.head;
+		this.tail = this.head;
+		let temp: Node<T> | null = currentNode.next;
+		while (temp) {
+			let nextNode = temp;
+			temp = nextNode.next;
+			nextNode.next = currentNode;
+			currentNode = nextNode;
+		}
+		this.head.next = null;
+		this.head = currentNode;
+
+		return this;
+	}
 }
