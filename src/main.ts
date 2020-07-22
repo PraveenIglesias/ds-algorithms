@@ -1,7 +1,7 @@
-import LinkedList from './LinkedList/SingleLinkedList';
+import SingleLinkedList from './LinkedList/SingleLinkedList';
 import DoubleLinkedList from './LinkedList/DoubleLinkedList';
 
-const ll = new LinkedList(3);
+const ll = new SingleLinkedList(3);
 ll.append(4);
 ll.append(6);
 ll.append(8); // 3,4,6,8;

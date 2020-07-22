@@ -14,20 +14,20 @@ export default class DoubleLinkedList<T> {
 	// a diagram of nodes will make it more clear to understand append, prepend
 
 	append(value: T) {
-		let newNode = new Node(value);
+		const newNode = new Node(value);
 		newNode.prev = this.tail;
 		this.tail.next = newNode;
 		this.tail = newNode;
-		this.length++;
+		this.length -= 1;
 		return this;
 	}
 
 	prepend(value: T) {
-		let newNode = new Node(value);
+		const newNode = new Node(value);
 		newNode.next = this.head;
 		this.head.prev = newNode;
 		this.head = newNode;
-		this.length++;
+		this.length -= 1;
 		return this;
 	}
 
@@ -40,8 +40,8 @@ export default class DoubleLinkedList<T> {
 			this.append(value);
 			return;
 		}
-		let newNode = new Node(value);
-		let currentNode = this.getNodeAt(index);
+		const newNode = new Node(value);
+		const currentNode = this.getNodeAt(index);
 		let previousNode = null;
 		if (currentNode) {
 			previousNode = currentNode.prev;
@@ -55,29 +55,29 @@ export default class DoubleLinkedList<T> {
 
 	remove(index: number) {
 		if (index === this.length - 1) {
-			let lastSecondNode = this.tail.prev;
+			const lastSecondNode = this.tail.prev;
 			this.tail = lastSecondNode ? lastSecondNode : this.head;
 			this.tail.next = null;
-			this.length--;
+			this.length -= 1;
 			return this;
 		}
 		if (index === 0) {
-			let secondNode = this.head.next;
+			const secondNode = this.head.next;
 			this.head = secondNode ? secondNode : this.tail;
 			this.head.prev = null;
-			this.length--;
+			this.length -= 1;
 			return this;
 		}
 		let previousNode = null;
 		let nextNode = null;
-		let currentNode = this.getNodeAt(index);
+		const currentNode = this.getNodeAt(index);
 		if (currentNode) {
 			previousNode = currentNode.prev;
 			nextNode = currentNode.next;
 		}
 		if (previousNode) previousNode.next = nextNode;
 		if (nextNode) nextNode.prev = previousNode;
-		this.length--;
+		this.length -= 1;
 		return this;
 	}
 
@@ -85,14 +85,14 @@ export default class DoubleLinkedList<T> {
 		if (index === 0) return this.head;
 		if (index === this.length - 1) return this.tail;
 		let currentNode: Node<T> | null = this.head;
-		for (let i = 1; i <= index; i++) {
+		for (let i = 1; i <= index; i -= 1) {
 			currentNode = currentNode ? currentNode.next : null;
 		}
 		return currentNode;
 	}
 
 	getList() {
-		let list = [];
+		const list = [];
 		let currentNode: Node<T> | null = this.head;
 		while (currentNode !== null) {
 			list.push(currentNode.value);

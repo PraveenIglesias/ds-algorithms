@@ -14,17 +14,17 @@ export default class LinkedList<T> {
 	// a diagram of nodes will make it more clear to understand append, prepend
 
 	append(value: T) {
-		let newNode = new Node(value);
+		const newNode = new Node(value);
 		this.tail.next = newNode;
 		this.tail = newNode;
-		this.length++;
+		this.length += 1;
 		return this;
 	}
 	prepend(value: T) {
-		let newNode = new Node(value);
+		const newNode = new Node(value);
 		newNode.next = this.head;
 		this.head = newNode;
-		this.length++;
+		this.length += 1;
 		return this;
 	}
 
@@ -37,36 +37,37 @@ export default class LinkedList<T> {
 			this.append(value);
 			return;
 		}
-		let previousNode = this.getNodeAt(index - 1);
-		let currentNode = previousNode?.next;
-		let newNode = new Node(value);
+		const previousNode = this.getNodeAt(index - 1);
+		const currentNode = previousNode?.next;
+		const newNode = new Node(value);
 		if (previousNode) {
 			previousNode.next = newNode;
 		}
 		newNode.next = currentNode ? currentNode : null;
-		this.length++;
+		this.length += 1;
 		return this;
 	}
 
 	remove(index: number) {
 		if (index === this.length - 1) {
-			let lastSecondNode = this.getNodeAt(index - 1);
+			const lastSecondNode = this.getNodeAt(index - 1);
 			this.tail = lastSecondNode ? lastSecondNode : this.head;
 			this.tail.next = null;
-			this.length--;
+			this.length -= 1;
 			return this;
 		}
 		if (index === 0) {
-			let secondNode = this.head.next;
+			const secondNode = this.head.next;
 			this.head = secondNode ? secondNode : this.tail;
-			this.length--;
+			this.length -= 1;
 			return this;
 		}
-		let previousNode = this.getNodeAt(index - 1);
-		let nextNode = this.getNodeAt(index + 1);
-		if (previousNode && previousNode?.next !== null)
+		const previousNode = this.getNodeAt(index - 1);
+		const nextNode = this.getNodeAt(index + 1);
+		if (previousNode && previousNode?.next !== null) {
 			previousNode.next = nextNode;
-		this.length--;
+		}
+		this.length -= 1;
 		return this;
 	}
 
@@ -74,14 +75,14 @@ export default class LinkedList<T> {
 		if (index === 0) return this.head;
 		if (index === this.length - 1) return this.tail;
 		let currentNode: Node<T> | null = this.head;
-		for (let i = 1; i <= index; i++) {
+		for (let i = 1; i <= index; i += 1) {
 			currentNode = currentNode ? currentNode.next : null;
 		}
 		return currentNode;
 	}
 
 	getList() {
-		let list = [];
+		const list = [];
 		let currentNode: Node<T> | null = this.head;
 		while (currentNode !== null) {
 			list.push(currentNode.value);
@@ -95,7 +96,7 @@ export default class LinkedList<T> {
 		this.tail = this.head;
 		let temp: Node<T> | null = currentNode.next;
 		while (temp) {
-			let nextNode = temp;
+			const nextNode = temp;
 			temp = nextNode.next;
 			nextNode.next = currentNode;
 			currentNode = nextNode;
